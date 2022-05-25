@@ -39,6 +39,8 @@ function AddForm(props) {
       name,
       price
     }
+    setName("")
+    setPrice(0)
     props.addProduct(newProduct)
     // lifting the state up
   }
