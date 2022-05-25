@@ -1,7 +1,10 @@
 import { useState } from "react"
 
 
-function AddForm() {
+function AddForm(props) {
+
+  // const { addProduct } = props
+  //          ref
 
   const [ name, setName ] = useState("")
   const [ price, setPrice ] = useState(0)
@@ -17,10 +20,27 @@ function AddForm() {
 
   const handlePriceChange = (event) => setPrice(event.target.value)
 
+  // para dinamicamente controlar formularios muy grandes
+  // const [ form, setForm ] = useState({
+  //   name: "",
+  //   price: 0
+  // })
+
+  // const handleChange = (event) => {
+  //   const formCopy = {...form}
+  //   formCopy[event.target.name] = event.target.value
+  //   setForm( formCopy )
+  // }
+
   const handleSubmit = (event) => {
     event.preventDefault() // esto previene el comportamiento predeterminado de un formulario
-    console.log("haciendo submit", event.target)
-    // como actualizamos el estado con esta informacion?
+    console.log("haciendo submit")
+    const newProduct = {
+      name,
+      price
+    }
+    props.addProduct(newProduct)
+    // lifting the state up
   }
 
   return (

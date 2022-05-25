@@ -14,12 +14,22 @@ function ShoppingList() {
 
   const [ products, setProducts ] = useState(testProducts)
 
+  function addProduct(ProductToAdd) {
+    console.log(ProductToAdd)
+
+    // ...aqui voy a agregar el item a products
+    // products.push(ProductToAdd) // si estamos el estado..
+    const productsCopy = [...products]
+    productsCopy.push(ProductToAdd)
+    setProducts([...products, ProductToAdd ])
+  }
+
   return (
     <div>
 
         <h1>Mi Lista de compras</h1>
     
-        <AddForm />
+        <AddForm addProduct={addProduct}/>
 
         <Search />
 

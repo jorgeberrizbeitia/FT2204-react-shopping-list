@@ -1,9 +1,4 @@
 
-const testProducts = [
-  { name: "Agua", price: 1 },
-  { name: "Conga", price: 20 },
-  { name: "Videojuego", price: 10 }
-]
 
 function Item(props) {
 

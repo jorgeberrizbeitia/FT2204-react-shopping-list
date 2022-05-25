@@ -1,8 +1,9 @@
 
 
-function Search() {
+function Search(props) {
+
   return (
-    <div>Search</div>
+    <div>Search {props.num}</div>
   )
 }
 
