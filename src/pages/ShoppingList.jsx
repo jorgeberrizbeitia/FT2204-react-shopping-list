@@ -2,6 +2,7 @@ import AddForm from "../components/AddForm"
 import Item from "../components/Item"
 import Search from "../components/Search"
 import { useState } from "react"
+import ItemsTotal from "../components/ItemsTotal"
 
 // esto podria ser un json
 const testProducts = [
@@ -13,8 +14,9 @@ const testProducts = [
 function ShoppingList() {
 
   const [ products, setProducts ] = useState(testProducts) // .todos los elementos
-  const [ filteredProducts, setFilteredProducts ] = useState(testProducts)
+  const [ productsToDisplay, setProductsToDisplay ] = useState(testProducts)
   const [ showForm, setShowForm ] = useState(false)
+  const [ totalProducts, setTotalProducts ] = useState([])
 
   function addProduct(ProductToAdd) {
     console.log(ProductToAdd)
@@ -27,7 +29,7 @@ function ShoppingList() {
     const newArr = [...products, ProductToAdd ]
     setShowForm(false)
     setProducts(newArr) // => products es igual a newArr 
-    setFilteredProducts(newArr)
+    setProductsToDisplay(newArr)
 
   }
 
@@ -45,11 +47,16 @@ function ShoppingList() {
     // solo mostrar los elementos que concuerden con el str search
 
     const filteredArr = products.filter((eachProd) => {
-      return eachProd.name.includes(search)
+      return eachProd.name.toUpperCase().includes(search.toUpperCase())
     })
 
     // console.log(filteredArr)
-    setFilteredProducts(filteredArr)
+    setProductsToDisplay(filteredArr)
+  }
+
+  const addProductTotal = (theProduct) => {
+    console.log(theProduct)
+    setTotalProducts([...totalProducts, theProduct])
   }
 
   return (
@@ -69,13 +76,21 @@ function ShoppingList() {
         <hr />
 
         {
-          filteredProducts.map((eachProduct, index) => {
+          productsToDisplay.map((eachProduct, index) => {
             return (
-              <Item key={eachProduct.name + index} eachProductProp={eachProduct}/>
+              <Item 
+                key={eachProduct.name + index} 
+                eachProductProp={eachProduct} 
+                addProductTotal={addProductTotal} 
+              />
             )
           })
         }
         
+        <hr />
+
+        <ItemsTotal totalProducts={totalProducts}/>
+
     
     </div>
   )
